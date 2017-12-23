@@ -35,7 +35,8 @@ The goals / steps of this project are the following:
 #### 1. Submission includes all required files and can be used to run the simulator in autonomous mode
 
 My project includes the following files:
-* model.py containing the script to create and train the model
+* main.py containing the script to train the model
+* model.py containing the script to create the model
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network
 * writeup_report.md or writeup_report.pdf summarizing the results
@@ -160,18 +161,18 @@ ________________________________________________________________________________
 
 To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
 
-![ex1][./asset/ex1.jpg]
-![ex2][./asset/ex2.jpg]
+![ex1](asset/ex1.jpg)
+![ex2](asset/ex2.jpg)
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to return to center
 
-![recovery][./asset/recovery.jpg]
+![recovery](asset/recovery.jpg)
 
 Then I repeated this process on track one in reverse direction.
 
 To augment the data sat, I also flipped images and angles. Here is an image that has then been flipped:
 
-![flipped][./asset/recovery_flip.jpg]
+![flipped](asset/recovery_flip.jpg)
 
 
 After the collection process, I had the following data points:
