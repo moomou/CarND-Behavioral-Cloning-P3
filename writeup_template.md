@@ -37,6 +37,7 @@ The goals / steps of this project are the following:
 My project includes the following files:
 * main.py containing the script to train the model
 * model.py containing the script to create the model
+* data.py containing the script on generator and image processing
 * drive.py for driving the car in autonomous mode
 * model.h5 containing a trained convolution neural network
 * writeup_report.md or writeup_report.pdf summarizing the results
@@ -49,15 +50,15 @@ python drive.py model.h5
 
 #### 3. Submission code is usable and readable
 
-The model.py file contains the code for training and saving the convolution neural network. The file shows the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
+The main.py and model.py file contains the code for training and saving the convolution neural network. The data.py contains the pipeline I used for training and validating the model, and it contains comments to explain how the code works.
 
 ### Model Architecture and Training Strategy
 
 #### 1. An appropriate model architecture has been employed
 
-On a high level, the model uses repeating blocks 5x5 convolution (CNN) layers, 1x1 CNN layers, and 5x5 CNN layers with one batch normalization and ReLU after the 1x1 CNN layer.
+On a high level, the model uses repeating blocks of 5x5 convolution (CNN) layers, 1x1 CNN layers, and 5x5 CNN layers with one batch normalization and ReLU after the 1x1 CNN layer.
 
-The block is repeated twice and an attention based dense layer follows with dense layers.
+The block is repeated twice and an attention based dense layer follows with classifier layers.
 
 For details on how this is derived as well as the final schematic, see the following sections.
 
@@ -65,7 +66,7 @@ For details on how this is derived as well as the final schematic, see the follo
 
 The model contains 2 dropout layers between the last classify layers with probability 0.5 and the input images are downsized by half with guassian blur applied.
 
-Additionally, the dataset is augmented with horizontal flip to double the dataset and left and right camera images utilized.
+Additionally, the dataset is augmented with horizontal flip to double the dataset. Finally, I also use left and right camera images.
 
 The model was trained and validated on different data sets to ensure that the model was not overfitting. The model was tested by running it through the simulator and ensuring that the vehicle could stay on the track at speed 9mph and 15mph.
 
@@ -93,7 +94,7 @@ To combat the overfitting, I modified the model to incorporate dropout layers as
 
 The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track so I collected more training data dealing those specific section of the track.
 
-At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road. See video.mp4 in the repo for a demonstration.
+At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road. See [video](video.mp4) in the repo for a demonstration.
 
 #### 2. Final Model Architecture
 
@@ -159,18 +160,18 @@ ________________________________________________________________________________
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here are some example images of center lane driving:
 
 ![ex1](asset/ex1.jpg)
 ![ex2](asset/ex2.jpg)
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to return to center
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to return to center. An example image is shown below.
 
 ![recovery](asset/recovery.jpg)
 
 Then I repeated this process on track one in reverse direction.
 
-To augment the data sat, I also flipped images and angles. Here is an image that has then been flipped:
+To augment the dataset further, I also flipped images and angles. Here is an image that has then been horizontally flipped:
 
 ![flipped](asset/recovery_flip.jpg)
 
@@ -180,6 +181,6 @@ After the collection process, I had the following data points:
     Total train samples:: 28668
     Total test samples:: 3186
 
-I then preprocessed the data as suggested in the lectures with downsizing and guassia blur and finally normalization plus cropping as suggested in the lectures.
+I then preprocessed the data with downsizing and guassia blur and finally normalization plus cropping as suggested in the lectures.
 
 The validation set helped determine if the model was over or under fitting. The ideal number of epochs was around 15  as evidenced by diverging validation loss vs training loss. I used an adam optimizer.

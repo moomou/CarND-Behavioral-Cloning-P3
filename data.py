@@ -18,6 +18,8 @@ OFFSET = 0.35
 
 
 def augment_images(data):
+    # augments the data by adding a tuple (image_index, flip or not) to the
+    # data tuple
     new_x = []
     for x in data:
         new_x.append((0, 0) + x)
